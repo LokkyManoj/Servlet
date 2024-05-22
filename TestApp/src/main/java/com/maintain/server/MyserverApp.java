@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.maintain.model.PojoClasses;
 import com.maintain.util.UserConnection;
+import com.maintain.util.UserCrudOp;
+
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,19 +29,19 @@ public class MyserverApp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Users user = new Users();
 	PojoClasses pj=new PojoClasses();
+    public UserCrudOp userCrudOp = new UserCrudOp();
+
     /**
      * @see HttpServlet#HttpServlet()
      */
     public MyserverApp() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		String username = request.getParameter("username");
 
@@ -46,41 +49,24 @@ public class MyserverApp extends HttpServlet {
 		String date=request.getParameter("date");
 		String email=request.getParameter("email");
 		
-		pj.setUserName(username);
-		
-		pj.setMobileNo(mobile);
-		pj.setDate(date);
-		pj.setEmail(email);
-		
-		
-		
-		
-		
-		System.out.println(date);
-		user.addUser(username, mobile, date,email);
-		request.setAttribute("user", user.getUser());
-		
-		  try (Connection con = UserConnection.getConnection()) {
-	            String query = "INSERT INTO userinfo (name, mobile, date_of_birth, email) VALUES (?, ?, ?, ?)";
-	            try (PreparedStatement pstmt = con.prepareStatement(query)) {
-	                // Setting parameters for the query
-	                pstmt.setString(1, username);
-	                pstmt.setString(2, mobile);
-	                pstmt.setString(3, date);
-	                pstmt.setString(4, email);
+//		pj.setUserName(username);
+//		
+//		pj.setMobileNo(mobile);
+//		pj.setDate(date);
+//		pj.setEmail(email);
+//	user.addUser(username, mobile, date,email);
+//		request.setAttribute("user", user.getUser());
+//	
+//		  		request.getRequestDispatcher("UserCred.jsp").forward(request, response);
+		 PojoClasses pj = new PojoClasses(username, mobile, date, email);
+	        userCrudOp.addUser(pj);
 
-	                // Executing the query
-	               int set =  pstmt.executeUpdate();
-	               System.out.println(set);
-	            } catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	        } catch (ClassNotFoundException | SQLException ex) {
-	        	System.out.println("catch");
-	        	Logger.getLogger(MyserverApp.class.getName()).log(Level.SEVERE, null, ex);
-			} 		
-//		request.getRequestDispatcher("UserCred.jsp").forward(request, response);
+	        request.setAttribute("user", pj);
+	        ArrayList<PojoClasses> userList = userCrudOp.getAllUsers();
+	        request.setAttribute("userList", userList);
+
+
+	        request.getRequestDispatcher("UserCred.jsp").forward(request, response);
 	}
 
 	/**

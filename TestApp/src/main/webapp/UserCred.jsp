@@ -91,7 +91,7 @@
                 </thead>
                 <tbody>
     <% 
-    ArrayList<PojoClasses> userRegister = (ArrayList<PojoClasses>) request.getAttribute("user");
+    ArrayList<PojoClasses> userRegister = (ArrayList<PojoClasses>) request.getAttribute("userList");
     if (userRegister != null) {
         for (PojoClasses info : userRegister) { %>
         <tr>
