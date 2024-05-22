@@ -12,7 +12,9 @@ import com.maintain.model.PojoClasses;
 import com.maintain.server.MyserverApp;
 
 
-	public class UserCrudOp {
+	public class UserCrudOp 
+	
+	{
 	    public void addUser(PojoClasses pj) {
 	        try (Connection con = UserConnection.getConnection()) {
 	            String query = "INSERT INTO userinfo (name, mobile, date_of_birth, email) VALUES (?, ?, ?, ?)";
@@ -39,6 +41,7 @@ import com.maintain.server.MyserverApp;
 	                try (ResultSet rs = pstmt.executeQuery()) {
 	                    while (rs.next()) {
 	                        PojoClasses user = new PojoClasses();
+	                        user.setId(rs.getInt("id"));
 	                        user.setUserName(rs.getString("name"));
 	                        user.setMobileNo(rs.getString("mobile"));
 	                        user.setDate(rs.getString("date_of_birth"));
@@ -51,6 +54,36 @@ import com.maintain.server.MyserverApp;
 	            Logger.getLogger(UserCrudOp.class.getName()).log(Level.SEVERE, null, ex);
 	        }
 	        return userList;
+	    }
+	    
+	    
+	    public void deleteUser(int id) {
+	        try (Connection con = UserConnection.getConnection()) {
+	            String query = "delete from userinfo where id = ?";
+	            try (PreparedStatement pstmt = con.prepareStatement(query)) {
+	                pstmt.setInt(1, id);
+	                pstmt.executeUpdate();
+	            }
+	        } catch (ClassNotFoundException | SQLException ex) {
+	            Logger.getLogger(UserCrudOp.class.getName()).log(Level.SEVERE, null, ex);
+	        }
+	    }
+	    
+	    
+	    
+	    public void updateUser(PojoClasses user) {
+	        try (Connection con = UserConnection.getConnection()) {
+	            String query = "update userinfo set mobile=?, date_of_birth=?, email=? WHERE name=?";
+	            try (PreparedStatement pstmt = con.prepareStatement(query)) {
+	                pstmt.setString(1, user.getMobileNo());
+	                pstmt.setString(2, user.getDate());
+	                pstmt.setString(3, user.getEmail());
+	                pstmt.setString(4, user.getUserName());
+	                pstmt.executeUpdate();
+	            }
+	        } catch (ClassNotFoundException | SQLException ex) {
+	            Logger.getLogger(UserCrudOp.class.getName()).log(Level.SEVERE, null, ex);
+	        }
 	    }
 	    
 	    

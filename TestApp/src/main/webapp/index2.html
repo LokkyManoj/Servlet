@@ -196,6 +196,7 @@ body{
         </div>
             <div class="input-box">
                 <input type="password" placeholder="Password"/><i class='bx bxs-lock-alt'></i>
+                <input type="hidden" name="action" value="add"> 
             </div><br>
            <!--  <div class="input-box">
                 <input type="password" placeholder="Confirm Password"/>
@@ -203,9 +204,14 @@ body{
             <div class="save-password">
                 <label><input type="checkbox"/> Save Password</label>
             </div>  -->
-            <div class="submit-options">
-                <button type="submit">SignUp</button>
-            </div>
+          <!--   <div class="submit-options">
+                <button type="submit" value="add">SignUp</button>
+            </div> -->
+    <!-- Specify the action as "add" -->
+    <div class="submit-options">
+        <button type="submit" name="action" value="add">SignUp</button>
+    </div>
+</form>
             <div class="submit-options1">
                 <p>Already Registered? <a href="Login.html" style="color: #a1517c;">Login</a></p>
             </div>

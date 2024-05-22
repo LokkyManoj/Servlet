@@ -1,6 +1,14 @@
 package com.maintain.model;
 
 public class PojoClasses {
+int id;	
+public int getId() {
+	return id;
+}
+public void setId(int id) {
+	this.id = id;
+}
+
 String userName;
 String mobileNo;
 String date;
@@ -41,9 +49,10 @@ public PojoClasses() {
 	
 }
 
+@Override
 public String toString() {
-	return "RegistrationPojo [userName=" + userName + ", mobileNo=" + mobileNo + ", date=" + date + ", email=" + email
-			+ "]";
+	return "PojoClasses [id=" + id + ", userName=" + userName + ", mobileNo=" + mobileNo + ", date=" + date + ", email="
+			+ email + "]";
 }
 
 }
