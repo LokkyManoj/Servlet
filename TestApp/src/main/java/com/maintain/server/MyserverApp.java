@@ -27,7 +27,7 @@ import java.util.logging.Logger;
 @WebServlet("/openServlet")
 public class MyserverApp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private UserCrudOp userCrudOp = new UserCrudOp();
+	public UserCrudOp userCrudOp = new UserCrudOp();
 
 	public MyserverApp() {
 		super();
@@ -74,6 +74,7 @@ public class MyserverApp extends HttpServlet {
 
         } else {
             // Handle other POST requests (e.g., update)
+        	
         }
     }
 	

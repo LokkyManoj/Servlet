@@ -100,7 +100,7 @@ body {
 						for (PojoClasses info : userRegister) {
 					%>
 					<tr>
-					   <td><%=info.getId()%></td>
+						<td><%=info.getId()%></td>
 						<td><%=info.getUserName()%></td>
 						<td><%=info.getMobileNo()%></td>
 						<td><%=info.getDate()%></td>
@@ -108,9 +108,15 @@ body {
 						<td>
 						<td>
 							<form action="openServlet" method="post">
-								<input type="hidden" name="deleteid"
-									value="<%=info.getId()%>"> <input type="submit"
-									name="action" value="Delete">
+								<input type="hidden" name="deleteid" value="<%=info.getId()%>">
+								<input type="submit" name="action" value="Delete">
+							</form>
+						</td>
+
+						<td>
+							<form action="UpdateUser.html" method="post">
+								<input type="hidden" name="id" value="<%=info.getId()%>">
+								<input type="submit" name="action" value="Update">
 							</form>
 						</td>
 

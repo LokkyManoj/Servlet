@@ -73,19 +73,22 @@ import com.maintain.server.MyserverApp;
 	    
 	    public void updateUser(PojoClasses user) {
 	        try (Connection con = UserConnection.getConnection()) {
-	            String query = "update userinfo set mobile=?, date_of_birth=?, email=? WHERE name=?";
+	            String query = "UPDATE userinfo SET name=?, mobile=?, date_of_birth=?, email=? WHERE id=?";
 	            try (PreparedStatement pstmt = con.prepareStatement(query)) {
-	                pstmt.setString(1, user.getMobileNo());
-	                pstmt.setString(2, user.getDate());
-	                pstmt.setString(3, user.getEmail());
-	                pstmt.setString(4, user.getUserName());
-	                pstmt.executeUpdate();
+	                pstmt.setString(1, user.getUserName());
+	                pstmt.setString(2, user.getMobileNo());
+	                pstmt.setString(3, user.getDate());
+	                pstmt.setString(4, user.getEmail());
+	                pstmt.setInt(5, user.getId());
+	                int rowsAffected = pstmt.executeUpdate();
+	                System.out.println("Rows affected: " + rowsAffected);
 	            }
 	        } catch (ClassNotFoundException | SQLException ex) {
 	            Logger.getLogger(UserCrudOp.class.getName()).log(Level.SEVERE, null, ex);
 	        }
 	    }
-	    
-	    
-	}
 
+	    }
+	    
+	    
+	
