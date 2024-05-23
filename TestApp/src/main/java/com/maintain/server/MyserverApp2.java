@@ -16,7 +16,8 @@ import com.maintain.util.UserCrudOp;
  * Servlet implementation class MyserverApp2
  */
 @WebServlet("/UpdateUserServlet")
-public class MyserverApp2 extends HttpServlet {
+public class MyserverApp2 extends HttpServlet 
+{
 	private static final long serialVersionUID = 1L;
 	public UserCrudOp userCrudOp = new UserCrudOp();
 
@@ -33,7 +34,6 @@ public class MyserverApp2 extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -41,21 +41,21 @@ public class MyserverApp2 extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
 
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		String action = request.getParameter("action");
+		System.out.println(action);
 		if(action != null && action.equals("Update")){
-            // Handle other POST requests (e.g., update)
-            System.out.println( "id from dopost" +request.getParameter("deleteid"));
-
+			/*
+			 * System.out.println( "id from dopost" +request.getParameter("deleteid"));
+			 */
 			 int id = Integer.parseInt(request.getParameter("updateid"));
+			 System.out.println(id);
 		        String name = request.getParameter("name");
 		        String mobile = request.getParameter("mobile");
 		        String dob = request.getParameter("dob");
 		        String email = request.getParameter("email");
 
-		        // Create a PojoClasses object with the updated information
 		        PojoClasses user = new PojoClasses();
 		        user.setId(id);
 		        user.setUserName(name);
@@ -63,11 +63,11 @@ public class MyserverApp2 extends HttpServlet {
 		        user.setDate(dob);
 		        user.setEmail(email);
 
-		        // Update the user information in the database
 		        userCrudOp.updateUser(user);
+		        ArrayList<PojoClasses> userList = userCrudOp.getAllUsers();
+	    		request.setAttribute("userList", userList);
 
-		        // Redirect back to a success page or refresh the current page
-	            response.sendRedirect("UserCred.jsp");
+	    		request.getRequestDispatcher("UserCred.jsp").forward(request, response);
 
 
         }

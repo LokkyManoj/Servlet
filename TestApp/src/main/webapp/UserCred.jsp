@@ -15,7 +15,7 @@ body {
 }
 
 .container {
-	width: 600px;
+	width: 900px;
 	margin: 50px auto;
 	padding: 20px;
 	background-color: #fff;
@@ -76,6 +76,26 @@ body {
 .user-details tr:last-child td {
 	border-bottom: none;
 }
+.delete-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-btn {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
 </style>
 </head>
 <body>
@@ -85,6 +105,7 @@ body {
 			<table>
 				<thead>
 					<tr>
+					<th>ID</th>
 						<th>Name</th>
 						<th>Mobile</th>
 						<th>DOB</th>
@@ -109,18 +130,15 @@ body {
 						<td>
 							<form action="openServlet" method="post">
 								<input type="hidden" name="deleteid" value="<%=info.getId()%>">
-								<input type="submit" name="action" value="Delete">
+								<input type="submit" name="action" value="Delete" class="delete-btn">
 							</form>
 						</td>
 
 						<td>
-							<form action="UpdateUser.html" method="post">
-								<input type="hidden" name="id" value="<%=info.getId()%>">
-								<input type="submit" name="action" value="Update">
-							</form>
+						<input type="hidden" name="action" value="edit">
+                         <input type="hidden" name="editid" value="<%= info.getId() %>">
+                         <button class="edit-btn" type="button" onclick="location.href = 'UpdateUser.jsp?editid=<%=info.getId()%>'">Update</button>
 						</td>
-
-
 					</tr>
 					<%
 					}

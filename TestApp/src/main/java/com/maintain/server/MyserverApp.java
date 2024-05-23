@@ -66,14 +66,12 @@ public class MyserverApp extends HttpServlet {
 
             int id =Integer.parseInt( request.getParameter("deleteid"));
             userCrudOp.deleteUser(id);
-            // Redirect to a success page or refresh the current page
     		ArrayList<PojoClasses> userList = userCrudOp.getAllUsers();
     		request.setAttribute("userList", userList);
 
     		request.getRequestDispatcher("UserCred.jsp").forward(request, response);
 
         } else {
-            // Handle other POST requests (e.g., update)
         	
         }
     }
