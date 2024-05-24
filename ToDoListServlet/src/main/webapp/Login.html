@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyTasks</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<style>
+    *{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background:url(bg2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+
+.wrapper{
+  width: 420px;
+  padding: 10px 40px;
+  min-height:50vh;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.wrapper h1{
+  text-align: center;
+  color:white;
+  margin: 20px 30px;
+}
+
+.wrapper .input-box{
+  width:100%;
+  position: relative;
+  height:40%;
+  margin: 20px 0 0 0;
+ 
+}
+
+.wrapper .input-box input{
+  width: 100%;
+  height: 40px;
+  margin:0;
+  border-radius: 50px;
+  background: transparent;
+  border: none;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  padding-left: 10px;
+  color:#fff;
+  font-size: 15px;
+}
+
+.wrapper .input-box input::placeholder{
+  color:#fff;
+  padding:10px;
+}
+.wrapper .input-box input[type="date"]{
+  color:#fff;
+  padding:20px;
+  padding-right: 25px;
+}
+
+.input-box i{
+  position: absolute;
+  color: #fff;
+  right:25px;
+  top:10px;
+}
+
+.wrapper .radio-btn{
+  width:100%;
+  margin: 20px 0 0 0;
+  font-size: 14px;
+  color: #fff;
+}
+
+.wrapper .radio-btn label{
+  margin:10px;
+}
+
+.wrapper .save-password{
+  width: 100%;
+  margin: 20px 0 0 0;
+  color:#fff;
+  font-size:14px;
+}
+
+.wrapper .submit-options{
+  width: 100%;
+  margin: 0 0 20px 0;
+}
+.wrapper .submit-options1{
+  width: 100%;
+  margin: 0 0 20px 0;
+}
+
+.wrapper .submit-options input{
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-radius: 50px;
+  margin: 20px 0;
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+background-color: #a1517c;
+}
+.wrapper .submit-options1 input{
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-radius: 50px;
+  margin: 20px 0;
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+
+}
+.wrapper .submit-options :hover{
+    background-color: white;
+    width: 100%;
+  height: 40px;
+  border-radius: 50px;
+  color: #a1517c;
+}
+
+.submit-options1>a{
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  color: #fff;
+  font-size: 14px;    
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.submit-options1>a:hover{
+  text-decoration: underline;
+}
+
+.submit-options1 p{
+  text-align: center;
+  font-size: 14px;  
+  color: #fff;
+}
+
+.submit-options1 p>a{
+  text-decoration: none;
+  font-weight: 600;
+  color: #fff;
+}
+</style>
+<body>
+    <div class="wrapper">
+        <form action="">
+            <h1>Login</h1>
+            <div class="input-box">
+                <input type="text" placeholder="Username" required/><i class='bx bx-at'></i>
+            </div>
+           
+            <div class="input-box">
+                <input type="password" placeholder="Password"/><i class='bx bxs-lock-alt'></i>
+            </div>
+
+            <div class="radio-btn">
+              You're :
+              <label><input type="radio" name="gender"/> Male</label>
+              <label><input type="radio" name="gender"/> Female</label>
+      </div>
+      <div class="radio-btn">
+          Role :
+          <label><input type="radio" name="role"/> Manager</label>
+          <label><input type="radio" name="role"/>Employee</label>
+  </div>
+           
+            <div class="submit-options">
+             <a href="toDo1.html">   <input type="button" value="Login" onclick="alert('Logged In successfully')"/></a>
+            </div>
+            
+        </form>
+    </div>
+</body>
+</html>
