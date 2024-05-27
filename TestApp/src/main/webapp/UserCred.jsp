@@ -23,35 +23,42 @@ body {
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.user-details {
+.search-box {
 	margin-bottom: 20px;
+	text-align: center;
 }
 
-.user-details label {
-	display: block;
+.search-box label {
+	font-size: 16px;
 	font-weight: bold;
-	margin-bottom: 5px;
+	margin-right: 10px;
 }
 
-.user-details p {
-	margin: 5px 0;
+.search-box input[type="text"] {
+	width: 60%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 16px;
+	margin-right: 10px;
 }
 
-.btn {
-	background-color: #007bff;
-	color: #fff;
+.search-box button {
 	padding: 10px 20px;
 	border: none;
 	border-radius: 5px;
+	background-color: #007bff;
+	color: white;
+	font-size: 16px;
 	cursor: pointer;
 }
 
-.btn:hover {
+.search-box button:hover {
 	background-color: #0056b3;
 }
 
 .user-details {
-	width: 100%;
+	margin-bottom: 20px;
 }
 
 .user-details table {
@@ -59,53 +66,75 @@ body {
 	border-collapse: collapse;
 }
 
-.user-details td {
+.user-details th, .user-details td {
 	padding: 8px;
-	border: 2px solid #ddd;
+	border: 1px solid #ddd;
 }
 
-.user-details td:first-child {
-	width: 120px;
+.user-details th {
+	background-color: #f2f2f2;
 	font-weight: bold;
 }
 
-.user-details td:nth-child(odd) {
-	background-color: #f2f2f2;
+.user-details tr:nth-child(even) {
+	background-color: #f9f9f9;
 }
 
-.user-details tr:last-child td {
-	border-bottom: none;
-}
 .delete-btn {
-    background-color: red;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
+	background-color: red;
+	color: white;
+	border: none;
+	padding: 5px 10px;
+	border-radius: 5px;
+	cursor: pointer;
 }
 
 .edit-btn {
-    background-color: green;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
+	background-color: green;
+	color: white;
+	border: none;
+	padding: 5px 10px;
+	border-radius: 5px;
+	cursor: pointer;
 }
-
-
-
 </style>
+<script>
+function filterTable() {
+	let input = document.getElementById("searchInput");
+	let filter = input.value.toLowerCase();
+	let table = document.getElementById("userTable");
+	let trs = table.getElementsByTagName("tr");
+
+	for (let i = 1; i < trs.length; i++) {
+		let tds = trs[i].getElementsByTagName("td");
+		let found = false;
+		for (let j = 0; j < tds.length; j++) {
+			if (tds[j]) {
+				let txtValue = tds[j].textContent || tds[j].innerText;
+				if (txtValue.toLowerCase().indexOf(filter) > -1) {
+					found = true;
+					break;
+				}
+			}
+		}
+		trs[i].style.display = found ? "" : "none";
+	}
+}
+</script> 
 </head>
 <body>
 	<div class="container">
 		<h2>User Details</h2>
+		<div class="search-box">
+			<label for="searchInput">Search Users:</label>
+			<input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Enter UserName">
+			<button type="button" onclick="filterTable()">Search</button>
+		</div>
 		<div class="user-details">
-			<table>
+			<table id="userTable">
 				<thead>
 					<tr>
-					<th>ID</th>
+						<th>ID</th>
 						<th>Name</th>
 						<th>Mobile</th>
 						<th>DOB</th>
@@ -127,17 +156,15 @@ body {
 						<td><%=info.getDate()%></td>
 						<td><%=info.getEmail()%></td>
 						<td>
-						<td>
 							<form action="openServlet" method="post">
 								<input type="hidden" name="deleteid" value="<%=info.getId()%>">
 								<input type="submit" name="action" value="Delete" class="delete-btn">
 							</form>
 						</td>
-
 						<td>
-						<input type="hidden" name="action" value="edit">
-                         <input type="hidden" name="editid" value="<%= info.getId() %>">
-                         <button class="edit-btn" type="button" onclick="location.href = 'UpdateUser.jsp?editid=<%=info.getId()%>'">Update</button>
+							<input type="hidden" name="action" value="edit">
+							<input type="hidden" name="editid" value="<%= info.getId() %>">
+							<button class="edit-btn" type="button" onclick="location.href = 'UpdateUser.jsp?editid=<%=info.getId()%>'">Update</button>
 						</td>
 					</tr>
 					<%
